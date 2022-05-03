@@ -15,7 +15,6 @@ public:
 	ConsoleOutput();
 	~ConsoleOutput() = default;
 
-
 	void DrawCell(int x, int y, int cell = 0) override;
 
 private:

@@ -3,6 +3,7 @@
 
 #include "Point.h"
 #include "GraphicsEngine.h"
+#include "Constants.h"
 
 class Player
 {

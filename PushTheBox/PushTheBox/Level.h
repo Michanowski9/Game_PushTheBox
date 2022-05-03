@@ -6,6 +6,8 @@
 #include "GraphicsEngine.h"
 #include "Player.h"
 
+#include "Constants.h"
+
 class Level
 {
 public:

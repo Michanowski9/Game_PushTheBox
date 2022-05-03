@@ -17,11 +17,11 @@ void Level::LoadDefaultMap()
 		{
 			if (x == 0 || y == 0 || x == mapSize.x - 1 || y == mapSize.y - 1)
 			{
-				map[x][y] = 1;
+				map[x][y] = CELL::WALL;
 			}
 			else
 			{
-				map[x][y] = 0;
+				map[x][y] = CELL::EMPTY;
 			}
 		}
 	}

@@ -9,7 +9,7 @@ Player::Player(GraphicsEngine& graphicsEngine)
 
 void Player::Draw()
 {
-	graphicsEngine.DrawCell(position.x, position.y, 2);
+	graphicsEngine.DrawCell(position.x, position.y, CELL::PLAYER);
 }
 
 void Player::SetPosition(int x, int y)
