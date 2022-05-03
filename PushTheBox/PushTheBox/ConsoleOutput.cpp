@@ -27,7 +27,7 @@ void ConsoleOutput::SetColor(byte color)
 	SetConsoleTextAttribute(handle, color);
 }
 
-byte ConsoleOutput::CellToColor(int cell)
+const byte ConsoleOutput::CellToColor(int cell) const
 {
 	switch (cell) {
 	case CELL::EMPTY:

@@ -20,12 +20,12 @@ void Game::MainLoop()
 
 void Game::HandleInput()
 {
-
+	//TODO
 }
 
 void Game::Update()
 {
-
+	//TODO
 }
 
 void Game::Render()

@@ -19,10 +19,11 @@ private:
 	void Update();
 	void Render();
 
-	InputHandler& inputHandler;
-	GraphicsEngine& graphicsEngine;
 	Level level;
 	Player player;
+
+	InputHandler& inputHandler;
+	GraphicsEngine& graphicsEngine;
 };
 
 #endif // !_GAME_H_

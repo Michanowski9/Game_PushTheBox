@@ -7,7 +7,7 @@ Player::Player(GraphicsEngine& graphicsEngine)
 
 }
 
-void Player::Draw()
+void Player::Draw() const
 {
 	graphicsEngine.DrawCell(position.x, position.y, CELL::PLAYER);
 }

@@ -20,7 +20,7 @@ public:
 private:
 	void SetCursorPosition(int x, int y);
 	void SetColor(byte color);
-	byte CellToColor(int cell);
+	const byte CellToColor(int cell) const;
 	
 	HANDLE handle;
 	enum COLORS {

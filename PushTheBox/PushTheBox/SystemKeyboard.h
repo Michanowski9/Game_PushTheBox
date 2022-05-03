@@ -3,7 +3,7 @@
 
 class SystemKeyboard {
 public:
-	virtual bool GetKeyState(int key) = 0;
+	virtual const bool GetKeyState(int key) = 0;
 };
 
 #endif // !_SYSTEM_KEYBOARD_H_
