@@ -2,6 +2,9 @@
 #define _PLAYER_H_
 
 #include "Point.h"
+
+#include "Constants.h"
+
 #include "GraphicsEngine.h"
 
 class Player
@@ -9,7 +12,7 @@ class Player
 public:
 	Player(GraphicsEngine& graphicsEngine);
 	~Player() = default;
-	void Draw();
+	void Draw() const;
 	void SetPosition(int x, int y);
 private:
 	Point position;

@@ -7,6 +7,11 @@ Level::Level(GraphicsEngine& graphicsEngine, Player& player)
 	map = nullptr;
 }
 
+Level::~Level()
+{
+	FreeMemMap();
+}
+
 void Level::LoadDefaultMap()
 {
 	SetMapSize(20, 10);
@@ -17,18 +22,18 @@ void Level::LoadDefaultMap()
 		{
 			if (x == 0 || y == 0 || x == mapSize.x - 1 || y == mapSize.y - 1)
 			{
-				map[x][y] = 1;
+				map[x][y] = CELL::WALL;
 			}
 			else
 			{
-				map[x][y] = 0;
+				map[x][y] = CELL::EMPTY;
 			}
 		}
 	}
 	player.SetPosition(5, 5);
 }
 
-void Level::DrawMap()
+void Level::DrawMap() const
 {
 	for (int y = 0; y < mapSize.y; y++)
 	{
@@ -41,6 +46,7 @@ void Level::DrawMap()
 
 void Level::SetMapSize(int x, int y)
 {
+	FreeMemMap();
 	mapSize = Point(x, y);
 
 	map = new int* [mapSize.x];
@@ -49,4 +55,16 @@ void Level::SetMapSize(int x, int y)
 		map[i] = new int[mapSize.y];
 	}
 
+}
+
+void Level::FreeMemMap()
+{
+	if (map == nullptr) {
+		return;
+	}
+	for (int i = 0; i < mapSize.x; i++)
+	{
+		delete map[i];
+	}
+	delete map;
 }

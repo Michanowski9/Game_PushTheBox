@@ -9,10 +9,10 @@ class Keyboard : public InputHandler
 public:		
 	Keyboard(SystemKeyboard& systemKeyboard);
 	~Keyboard() = default;
-	bool GetKeyDown(int keyCode) override;
-	bool GetKeyUp(int keyCode) override;
-	bool GetKeyPressed(int keyCode) override;
-	bool GetKeyReleased(int keyCode) override;
+	const bool GetKeyDown(int keyCode) const override;
+	const bool GetKeyUp(int keyCode) const override;
+	const bool GetKeyPressed(int keyCode) override;
+	const bool GetKeyReleased(int keyCode) override;
 
 
 private:

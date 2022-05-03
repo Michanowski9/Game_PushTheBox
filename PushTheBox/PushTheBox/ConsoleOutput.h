@@ -15,13 +15,12 @@ public:
 	ConsoleOutput();
 	~ConsoleOutput() = default;
 
-
 	void DrawCell(int x, int y, int cell = 0) override;
 
 private:
 	void SetCursorPosition(int x, int y);
 	void SetColor(byte color);
-	byte CellToColor(int cell);
+	const byte CellToColor(int cell) const;
 	
 	HANDLE handle;
 	enum COLORS {

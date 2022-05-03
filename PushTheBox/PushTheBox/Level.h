@@ -3,6 +3,8 @@
 
 #include "Point.h"
 
+#include "Constants.h"
+
 #include "GraphicsEngine.h"
 #include "Player.h"
 
@@ -12,14 +14,15 @@ public:
 	Level() = delete;
 	Level(GraphicsEngine& graphicsEngine, Player& player);
 
-	~Level() = default;
+	~Level();
 	void LoadDefaultMap();
-	void DrawMap();
+	void DrawMap() const;
 private:
 	void SetMapSize(int x, int y);
+	void FreeMemMap();
 
 	Point mapSize;
-	int** map; //TODO: memory dealocation
+	int** map;
 	GraphicsEngine& graphicsEngine;
 	Player& player;
 };

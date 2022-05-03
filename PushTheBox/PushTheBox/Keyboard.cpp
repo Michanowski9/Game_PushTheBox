@@ -9,17 +9,17 @@ Keyboard::Keyboard(SystemKeyboard& systemKeyboard)
 	}
 }
 
-bool Keyboard::GetKeyDown(int keyCode)
+const bool Keyboard::GetKeyDown(int keyCode) const
 {
 	return systemKeyboard.GetKeyState(keyCode);
 }
 
-bool Keyboard::GetKeyUp(int keyCode)
+const bool Keyboard::GetKeyUp(int keyCode) const
 {
 	return !systemKeyboard.GetKeyState(keyCode);
 }
 
-bool Keyboard::GetKeyPressed(int keyCode)
+const bool Keyboard::GetKeyPressed(int keyCode)
 {
 	bool result = false;
 	bool keyState = systemKeyboard.GetKeyState(keyCode);
@@ -30,7 +30,7 @@ bool Keyboard::GetKeyPressed(int keyCode)
 	return result;
 }
 
-bool Keyboard::GetKeyReleased(int keyCode)
+const bool Keyboard::GetKeyReleased(int keyCode)
 {
 	bool result = false;
 	bool keyState = systemKeyboard.GetKeyState(keyCode);
