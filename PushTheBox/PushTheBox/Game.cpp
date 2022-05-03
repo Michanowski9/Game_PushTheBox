@@ -1,26 +1,33 @@
 #include "Game.h"
 
-Game::Game(GraphicsEngine& graphicsEngine) : graphicsEngine(graphicsEngine) {
+Game::Game(GraphicsEngine& graphicsEngine) 
+	: graphicsEngine(graphicsEngine), 
+		level(Level(graphicsEngine)) 
+{
 
 };
 
 void Game::MainLoop()
 {
 	//TODO: add loop
-	HandleInput();
-	Update();
-	Render();
+	//while (true) {
+		HandleInput();
+		Update();
+		Render();
+	//}
 }
 
 void Game::HandleInput()
 {
+
 }
 
 void Game::Update()
 {
+
 }
 
 void Game::Render()
 {
-	graphicsEngine.DrawMap();
+	level.DrawMap();
 }

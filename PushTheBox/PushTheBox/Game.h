@@ -2,6 +2,7 @@
 #define _GAME_H_
 
 #include "GraphicsEngine.h"
+#include "Level.h"
 
 class Game
 {
@@ -17,6 +18,7 @@ private:
 	void Render();
 
 	GraphicsEngine& graphicsEngine;
+	Level level;
 };
 
 #endif // !_GAME_H_

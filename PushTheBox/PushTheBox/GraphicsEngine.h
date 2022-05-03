@@ -3,7 +3,7 @@
 
 class GraphicsEngine {
 public:
-	virtual void DrawMap() = 0;
+	virtual void DrawCell(int x, int y, int fill) = 0;
 };
 
 #endif // !_GRAPHICS_ENGINE_H_
