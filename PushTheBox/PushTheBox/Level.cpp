@@ -23,6 +23,7 @@ void Level::LoadDefaultMap()
 			}
 		}
 	}
+	map[mapSize.x / 2][mapSize.y / 2] = 2;
 }
 
 void Level::DrawMap()

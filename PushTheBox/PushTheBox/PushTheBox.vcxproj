@@ -141,17 +141,23 @@
   <ItemGroup>
     <ClCompile Include="ConsoleOutput.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Point.cpp" />
+    <ClCompile Include="WindowsKeyboard.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ConsoleOutput.h" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GraphicsEngine.h" />
+    <ClInclude Include="InputHandler.h" />
+    <ClInclude Include="Keyboard.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="Point.h" />
+    <ClInclude Include="SystemKeyboard.h" />
+    <ClInclude Include="WindowsKeyboard.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

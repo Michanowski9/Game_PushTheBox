@@ -1,7 +1,8 @@
 #include "Game.h"
 
-Game::Game(GraphicsEngine& graphicsEngine) 
+Game::Game(GraphicsEngine& graphicsEngine, InputHandler& inputHandler) 
 	: graphicsEngine(graphicsEngine), 
+		inputHandler(inputHandler),
 		level(Level(graphicsEngine)) 
 {
 
@@ -9,12 +10,11 @@ Game::Game(GraphicsEngine& graphicsEngine)
 
 void Game::MainLoop()
 {
-	//TODO: add loop
-	//while (true) {
+	while (true) {
 		HandleInput();
 		Update();
 		Render();
-	//}
+	}
 }
 
 void Game::HandleInput()
