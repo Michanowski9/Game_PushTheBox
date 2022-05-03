@@ -4,6 +4,7 @@
 #include "GraphicsEngine.h"
 #include "InputHandler.h"
 #include "Level.h"
+#include "Player.h"
 
 class Game
 {
@@ -21,7 +22,7 @@ private:
 	InputHandler& inputHandler;
 	GraphicsEngine& graphicsEngine;
 	Level level;
-
+	Player player;
 };
 
 #endif // !_GAME_H_
