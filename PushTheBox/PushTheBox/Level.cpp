@@ -1,8 +1,10 @@
 #include "Level.h"
 
-Level::Level(GraphicsEngine& graphicsEngine) : graphicsEngine(graphicsEngine)
+Level::Level(GraphicsEngine& graphicsEngine, Player& player)
+	: graphicsEngine(graphicsEngine),
+		player(player)
 {
-	LoadDefaultMap();
+	map = nullptr;
 }
 
 void Level::LoadDefaultMap()
@@ -23,7 +25,7 @@ void Level::LoadDefaultMap()
 			}
 		}
 	}
-	map[mapSize.x / 2][mapSize.y / 2] = 2;
+	player.SetPosition(5, 5);
 }
 
 void Level::DrawMap()

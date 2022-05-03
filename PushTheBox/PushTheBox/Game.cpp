@@ -1,11 +1,12 @@
 #include "Game.h"
 
-Game::Game(GraphicsEngine& graphicsEngine, InputHandler& inputHandler) 
-	: graphicsEngine(graphicsEngine), 
+Game::Game(GraphicsEngine& graphicsEngine, InputHandler& inputHandler)
+	: graphicsEngine(graphicsEngine),
 		inputHandler(inputHandler),
-		level(Level(graphicsEngine)) 
+		player(Player(graphicsEngine)),
+		level(Level(graphicsEngine, player))
 {
-
+	level.LoadDefaultMap();
 };
 
 void Game::MainLoop()
@@ -30,4 +31,5 @@ void Game::Update()
 void Game::Render()
 {
 	level.DrawMap();
+	player.Draw();
 }
