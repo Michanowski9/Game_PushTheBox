@@ -4,6 +4,8 @@
 #include "InputHandler.h"
 #include "SystemKeyboard.h"
 
+#define KEYBOARD_SIZE 0xFF
+
 class Keyboard : public InputHandler
 {
 public:		
@@ -16,8 +18,9 @@ public:
 
 
 private:
+	int GetLastKeyStateSize();
 	SystemKeyboard& systemKeyboard;
-	bool lastKeyState[0xFF] = {};
+	bool lastKeyState[KEYBOARD_SIZE] = {};
 };
 
 #endif // !_KEYBOARD_H_

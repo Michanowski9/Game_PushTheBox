@@ -3,9 +3,9 @@
 Keyboard::Keyboard(SystemKeyboard& systemKeyboard)
 	: systemKeyboard(systemKeyboard)
 {
-	for (int i = 0; i < sizeof(lastKeyState) / sizeof(bool); i++)
+	for (int i = 0; i < this->GetLastKeyStateSize(); i++)
 	{
-		lastKeyState[i] = 0;
+		lastKeyState[i] = false;
 	}
 }
 
@@ -39,4 +39,9 @@ const bool Keyboard::GetKeyReleased(int keyCode)
 	}
 	lastKeyState[keyCode] = keyState;
 	return result;
+}
+
+int Keyboard::GetLastKeyStateSize()
+{
+	return sizeof(lastKeyState) / sizeof(bool);
 }
