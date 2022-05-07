@@ -5,12 +5,18 @@
 
 int main() {
 
-	ConsoleOutput consoleOutput;
+	auto consoleOutputPtr = std::make_shared<ConsoleOutput>();
 
-	WindowsKeyboard windowsKeyboard;
-	Keyboard keyboard(windowsKeyboard);
+	auto keyboardPtr = std::make_shared<Keyboard>();
+	auto windowsKeyboardPtr = std::make_shared<WindowsKeyboard>();
+	keyboardPtr->SetSystemKeyboard(windowsKeyboardPtr);
 
-	Game game(consoleOutput, keyboard);
+	Game game;
+	game.SetGraphicsEngine(consoleOutputPtr);
+	game.SetInputHandler(keyboardPtr);
+	game.SetLevel();
+	game.SetPlayer();
+
 	game.MainLoop();
 
 	return 0;

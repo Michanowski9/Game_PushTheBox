@@ -9,13 +9,15 @@ public:
 	MOCK_METHOD(const bool, GetKeyState, (int), (override));
 };
 
+
 TEST(KeyboardTest, GetKeyDown_KeyIsDown_ReturnTrue) {
 	//Given
-	SystemKeyboardMock systemKeyboardMock;
-	EXPECT_CALL(systemKeyboardMock, GetKeyState('A'))
+	auto systemKeyboardMock = std::make_shared<SystemKeyboardMock>();
+	EXPECT_CALL(*systemKeyboardMock, GetKeyState('A'))
 		.WillOnce(Return(1));
 
-	Keyboard keyboard = Keyboard(systemKeyboardMock);
+	Keyboard keyboard = Keyboard();
+	keyboard.SetSystemKeyboard(systemKeyboardMock);
 
 	//When
 	auto result = keyboard.GetKeyDown('A');
@@ -25,11 +27,12 @@ TEST(KeyboardTest, GetKeyDown_KeyIsDown_ReturnTrue) {
 }
 TEST(KeyboardTest, GetKeyDown_KeyIsUp_ReturnFalse) {
 	//Given
-	SystemKeyboardMock systemKeyboardMock;
-	EXPECT_CALL(systemKeyboardMock, GetKeyState('A'))
+	auto systemKeyboardMock = std::make_shared<SystemKeyboardMock>();
+	EXPECT_CALL(*systemKeyboardMock, GetKeyState('A'))
 		.WillOnce(Return(0));
 
-	Keyboard keyboard = Keyboard(systemKeyboardMock);
+	Keyboard keyboard = Keyboard();
+	keyboard.SetSystemKeyboard(systemKeyboardMock);
 
 	//When
 	auto result = keyboard.GetKeyDown('A');
@@ -39,8 +42,9 @@ TEST(KeyboardTest, GetKeyDown_KeyIsUp_ReturnFalse) {
 }
 TEST(KeyboardTest, GetKeyDown_TooSmallKeyCode_ThrowException) {
 	//Given
-	SystemKeyboardMock systemKeyboardMock;
-	Keyboard keyboard = Keyboard(systemKeyboardMock);
+	auto systemKeyboardMock = std::make_shared<SystemKeyboardMock>();
+	Keyboard keyboard = Keyboard();
+	keyboard.SetSystemKeyboard(systemKeyboardMock);
 
 	//When
 	try {
@@ -59,8 +63,9 @@ TEST(KeyboardTest, GetKeyDown_TooSmallKeyCode_ThrowException) {
 }
 TEST(KeyboardTest, GetKeyDown_TooLargeKeyCode_ThrowException) {
 	//Given
-	SystemKeyboardMock systemKeyboardMock;
-	Keyboard keyboard = Keyboard(systemKeyboardMock);
+	auto systemKeyboardMock = std::make_shared<SystemKeyboardMock>();
+	Keyboard keyboard = Keyboard();
+	keyboard.SetSystemKeyboard(systemKeyboardMock);
 
 	//When
 	try {
@@ -80,11 +85,12 @@ TEST(KeyboardTest, GetKeyDown_TooLargeKeyCode_ThrowException) {
 
 TEST(KeyboardTest, GetKeyUp_KeyIsDown_ReturnFalse) {
 	//Given
-	SystemKeyboardMock systemKeyboardMock;
-	EXPECT_CALL(systemKeyboardMock, GetKeyState('A'))
+	auto systemKeyboardMock = std::make_shared<SystemKeyboardMock>();
+	EXPECT_CALL(*systemKeyboardMock, GetKeyState('A'))
 		.WillOnce(Return(1));
 
-	Keyboard keyboard = Keyboard(systemKeyboardMock);
+	Keyboard keyboard = Keyboard();
+	keyboard.SetSystemKeyboard(systemKeyboardMock);
 
 	//When
 	auto result = keyboard.GetKeyUp('A');
@@ -94,11 +100,12 @@ TEST(KeyboardTest, GetKeyUp_KeyIsDown_ReturnFalse) {
 }
 TEST(KeyboardTest, GetKeyUp_KeyIsUp_ReturnTrue) {
 	//Given
-	SystemKeyboardMock systemKeyboardMock;
-	EXPECT_CALL(systemKeyboardMock, GetKeyState('A'))
+	auto systemKeyboardMock = std::make_shared<SystemKeyboardMock>();
+	EXPECT_CALL(*systemKeyboardMock, GetKeyState('A'))
 		.WillOnce(Return(0));
 
-	Keyboard keyboard = Keyboard(systemKeyboardMock);
+	Keyboard keyboard = Keyboard();
+	keyboard.SetSystemKeyboard(systemKeyboardMock);
 
 	//When
 	auto result = keyboard.GetKeyUp('A');
@@ -108,8 +115,9 @@ TEST(KeyboardTest, GetKeyUp_KeyIsUp_ReturnTrue) {
 }
 TEST(KeyboardTest, GetKeyUp_TooSmallKeyCode_ThrowException) {
 	//Given
-	SystemKeyboardMock systemKeyboardMock;
-	Keyboard keyboard = Keyboard(systemKeyboardMock);
+	auto systemKeyboardMock = std::make_shared<SystemKeyboardMock>();
+	Keyboard keyboard = Keyboard();
+	keyboard.SetSystemKeyboard(systemKeyboardMock);
 
 	//When
 	try {
@@ -128,8 +136,9 @@ TEST(KeyboardTest, GetKeyUp_TooSmallKeyCode_ThrowException) {
 }
 TEST(KeyboardTest, GetKeyUp_TooLargeKeyCode_ThrowException) {
 	//Given
-	SystemKeyboardMock systemKeyboardMock;
-	Keyboard keyboard = Keyboard(systemKeyboardMock);
+	auto systemKeyboardMock = std::make_shared<SystemKeyboardMock>();
+	Keyboard keyboard = Keyboard();
+	keyboard.SetSystemKeyboard(systemKeyboardMock);
 
 	//When
 	try {
@@ -149,12 +158,13 @@ TEST(KeyboardTest, GetKeyUp_TooLargeKeyCode_ThrowException) {
 
 TEST(KeyboardTest, GetKeyPressed_KeyIsUpThanDown_ReturnTrue) {
 	//Given
-	SystemKeyboardMock systemKeyboardMock;
-	EXPECT_CALL(systemKeyboardMock, GetKeyState('A'))
+	auto systemKeyboardMock = std::make_shared<SystemKeyboardMock>();
+	EXPECT_CALL(*systemKeyboardMock, GetKeyState('A'))
 		.WillOnce(Return(0))
 		.WillRepeatedly(Return(1));
 
-	Keyboard keyboard = Keyboard(systemKeyboardMock);
+	Keyboard keyboard = Keyboard();
+	keyboard.SetSystemKeyboard(systemKeyboardMock);
 
 	//When
 	auto result1 = keyboard.GetKeyPressed('A');
@@ -168,12 +178,13 @@ TEST(KeyboardTest, GetKeyPressed_KeyIsUpThanDown_ReturnTrue) {
 }
 TEST(KeyboardTest, GetKeyPressed_KeyIsDownThanUp_ReturnFalse) {
 	//Given
-	SystemKeyboardMock systemKeyboardMock;
-	EXPECT_CALL(systemKeyboardMock, GetKeyState('A'))
+	auto systemKeyboardMock = std::make_shared<SystemKeyboardMock>();
+	EXPECT_CALL(*systemKeyboardMock, GetKeyState('A'))
 		.WillOnce(Return(1))
 		.WillRepeatedly(Return(0));
 
-	Keyboard keyboard = Keyboard(systemKeyboardMock);
+	Keyboard keyboard = Keyboard();
+	keyboard.SetSystemKeyboard(systemKeyboardMock);
 
 	//this is to skip not pressed state when constructing object 
 	//(by default is setting to false in array)
@@ -189,15 +200,16 @@ TEST(KeyboardTest, GetKeyPressed_KeyIsDownThanUp_ReturnFalse) {
 }
 TEST(KeyboardTest, GetKeyPressed_TwoKeysIsUpThanDownInTheSameTime_ReturnTrueForBoth) {
 	//Given
-	SystemKeyboardMock systemKeyboardMock;
-	EXPECT_CALL(systemKeyboardMock, GetKeyState('A'))
+	auto systemKeyboardMock = std::make_shared<SystemKeyboardMock>();
+	EXPECT_CALL(*systemKeyboardMock, GetKeyState('A'))
 		.WillOnce(Return(0))
 		.WillRepeatedly(Return(1));
-	EXPECT_CALL(systemKeyboardMock, GetKeyState('B'))
+	EXPECT_CALL(*systemKeyboardMock, GetKeyState('B'))
 		.WillOnce(Return(0))
 		.WillRepeatedly(Return(1));
 
-	Keyboard keyboard = Keyboard(systemKeyboardMock);
+	Keyboard keyboard = Keyboard();
+	keyboard.SetSystemKeyboard(systemKeyboardMock);
 
 	//When
 	auto result1a = keyboard.GetKeyPressed('A');
@@ -215,15 +227,16 @@ TEST(KeyboardTest, GetKeyPressed_TwoKeysIsUpThanDownInTheSameTime_ReturnTrueForB
 }
 TEST(KeyboardTest, GetKeyPressed_TwoKeysIsDownThanUpInTheSameTime_ReturnFalseForBoth) {
 	//Given
-	SystemKeyboardMock systemKeyboardMock;
-	EXPECT_CALL(systemKeyboardMock, GetKeyState('A'))
+	auto systemKeyboardMock = std::make_shared<SystemKeyboardMock>();
+	EXPECT_CALL(*systemKeyboardMock, GetKeyState('A'))
 		.WillOnce(Return(1))
 		.WillRepeatedly(Return(0));
-	EXPECT_CALL(systemKeyboardMock, GetKeyState('B'))
+	EXPECT_CALL(*systemKeyboardMock, GetKeyState('B'))
 		.WillOnce(Return(1))
 		.WillRepeatedly(Return(0));
 
-	Keyboard keyboard = Keyboard(systemKeyboardMock);
+	Keyboard keyboard = Keyboard();
+	keyboard.SetSystemKeyboard(systemKeyboardMock);
 
 	//this is to skip not pressed state when constructing object 
 	//(by default is setting to false in array)
@@ -246,17 +259,18 @@ TEST(KeyboardTest, GetKeyPressed_TwoKeysIsDownThanUpInTheSameTime_ReturnFalseFor
 }
 TEST(KeyboardTest, GetKeyPressed_OneKeyIsDownThanUpSecondIsUpThanDown_ReturnFalseForFirstTrueForSecond) {
 	//Given
-	SystemKeyboardMock systemKeyboardMock;
-	EXPECT_CALL(systemKeyboardMock, GetKeyState('A'))
+	auto systemKeyboardMock = std::make_shared<SystemKeyboardMock>();
+	EXPECT_CALL(*systemKeyboardMock, GetKeyState('A'))
 		.WillOnce(Return(1))	//used to skip
 		.WillOnce(Return(1))
 		.WillOnce(Return(0));
-	EXPECT_CALL(systemKeyboardMock, GetKeyState('B'))
+	EXPECT_CALL(*systemKeyboardMock, GetKeyState('B'))
 		.WillOnce(Return(0))	//used to skip
 		.WillOnce(Return(0))
 		.WillOnce(Return(1));
 
-	Keyboard keyboard = Keyboard(systemKeyboardMock);
+	Keyboard keyboard = Keyboard();
+	keyboard.SetSystemKeyboard(systemKeyboardMock);
 
 	//this is to skip not pressed state when constructing object 
 	//(by default is setting to false in array)
@@ -279,8 +293,9 @@ TEST(KeyboardTest, GetKeyPressed_OneKeyIsDownThanUpSecondIsUpThanDown_ReturnFals
 }
 TEST(KeyboardTest, GetKeyPressed_TooSmallKeyCode_ThrowException) {
 	//Given
-	SystemKeyboardMock systemKeyboardMock;
-	Keyboard keyboard = Keyboard(systemKeyboardMock);
+	auto systemKeyboardMock = std::make_shared<SystemKeyboardMock>();
+	Keyboard keyboard = Keyboard();
+	keyboard.SetSystemKeyboard(systemKeyboardMock);
 
 	//When
 	try {
@@ -299,8 +314,9 @@ TEST(KeyboardTest, GetKeyPressed_TooSmallKeyCode_ThrowException) {
 }
 TEST(KeyboardTest, GetKeyPressed_TooLargeKeyCode_ThrowException) {
 	//Given
-	SystemKeyboardMock systemKeyboardMock;
-	Keyboard keyboard = Keyboard(systemKeyboardMock);
+	auto systemKeyboardMock = std::make_shared<SystemKeyboardMock>();
+	Keyboard keyboard = Keyboard();
+	keyboard.SetSystemKeyboard(systemKeyboardMock);
 
 	//When
 	try {
@@ -320,12 +336,13 @@ TEST(KeyboardTest, GetKeyPressed_TooLargeKeyCode_ThrowException) {
 
 TEST(KeyboardTest, GetKeyReleased_KeyIsDownThanUp_ReturnTrue) {
 	//Given
-	SystemKeyboardMock systemKeyboardMock;
-	EXPECT_CALL(systemKeyboardMock, GetKeyState('A'))
+	auto systemKeyboardMock = std::make_shared<SystemKeyboardMock>();
+	EXPECT_CALL(*systemKeyboardMock, GetKeyState('A'))
 		.WillOnce(Return(1))
 		.WillOnce(Return(0));
 
-	Keyboard keyboard = Keyboard(systemKeyboardMock);
+	Keyboard keyboard = Keyboard();
+	keyboard.SetSystemKeyboard(systemKeyboardMock);
 
 	//When
 	auto result1 = keyboard.GetKeyReleased('A');
@@ -337,12 +354,13 @@ TEST(KeyboardTest, GetKeyReleased_KeyIsDownThanUp_ReturnTrue) {
 }
 TEST(KeyboardTest, GetKeyReleased_KeyIsUpThanDown_ReturnFalse) {
 	//Given
-	SystemKeyboardMock systemKeyboardMock;
-	EXPECT_CALL(systemKeyboardMock, GetKeyState('A'))
+	auto systemKeyboardMock = std::make_shared<SystemKeyboardMock>();
+	EXPECT_CALL(*systemKeyboardMock, GetKeyState('A'))
 		.WillOnce(Return(0))
 		.WillOnce(Return(1));
 
-	Keyboard keyboard = Keyboard(systemKeyboardMock);
+	Keyboard keyboard = Keyboard();
+	keyboard.SetSystemKeyboard(systemKeyboardMock);
 
 	//When
 	auto result1 = keyboard.GetKeyReleased('A');
@@ -354,15 +372,16 @@ TEST(KeyboardTest, GetKeyReleased_KeyIsUpThanDown_ReturnFalse) {
 }
 TEST(KeyboardTest, GetKeyReleased_TwoKeysIsDownThanUpInTheSameTime_ReturnTrueForBoth) {
 	//Given
-	SystemKeyboardMock systemKeyboardMock;
-	EXPECT_CALL(systemKeyboardMock, GetKeyState('A'))
+	auto systemKeyboardMock = std::make_shared<SystemKeyboardMock>();
+	EXPECT_CALL(*systemKeyboardMock, GetKeyState('A'))
 		.WillOnce(Return(1))
 		.WillRepeatedly(Return(0));
-	EXPECT_CALL(systemKeyboardMock, GetKeyState('B'))
+	EXPECT_CALL(*systemKeyboardMock, GetKeyState('B'))
 		.WillOnce(Return(1))
 		.WillRepeatedly(Return(0));
 
-	Keyboard keyboard = Keyboard(systemKeyboardMock);
+	Keyboard keyboard = Keyboard();
+	keyboard.SetSystemKeyboard(systemKeyboardMock);
 
 	//When
 	auto result1a = keyboard.GetKeyReleased('A');
@@ -380,15 +399,16 @@ TEST(KeyboardTest, GetKeyReleased_TwoKeysIsDownThanUpInTheSameTime_ReturnTrueFor
 }
 TEST(KeyboardTest, GetKeyReleased_TwoKeysIsUpThanDownInTheSameTime_ReturnFalseForBoth) {
 	//Given
-	SystemKeyboardMock systemKeyboardMock;
-	EXPECT_CALL(systemKeyboardMock, GetKeyState('A'))
+	auto systemKeyboardMock = std::make_shared<SystemKeyboardMock>();
+	EXPECT_CALL(*systemKeyboardMock, GetKeyState('A'))
 		.WillOnce(Return(0))
 		.WillRepeatedly(Return(1));
-	EXPECT_CALL(systemKeyboardMock, GetKeyState('B'))
+	EXPECT_CALL(*systemKeyboardMock, GetKeyState('B'))
 		.WillOnce(Return(0))
 		.WillRepeatedly(Return(1));
 
-	Keyboard keyboard = Keyboard(systemKeyboardMock);
+	Keyboard keyboard = Keyboard();
+	keyboard.SetSystemKeyboard(systemKeyboardMock);
 
 	//When
 	auto result1a = keyboard.GetKeyReleased('A');
@@ -406,15 +426,16 @@ TEST(KeyboardTest, GetKeyReleased_TwoKeysIsUpThanDownInTheSameTime_ReturnFalseFo
 }
 TEST(KeyboardTest, GetKeyReleased_OneKeyIsDownThanUpSecondIsUpThanDown_ReturnTrueForFirstFalseForSecond) {
 	//Given
-	SystemKeyboardMock systemKeyboardMock;
-	EXPECT_CALL(systemKeyboardMock, GetKeyState('A'))
+	auto systemKeyboardMock = std::make_shared<SystemKeyboardMock>();
+	EXPECT_CALL(*systemKeyboardMock, GetKeyState('A'))
 		.WillOnce(Return(1))
 		.WillOnce(Return(0));
-	EXPECT_CALL(systemKeyboardMock, GetKeyState('B'))
+	EXPECT_CALL(*systemKeyboardMock, GetKeyState('B'))
 		.WillOnce(Return(0))
 		.WillOnce(Return(1));
 
-	Keyboard keyboard = Keyboard(systemKeyboardMock);
+	Keyboard keyboard = Keyboard();
+	keyboard.SetSystemKeyboard(systemKeyboardMock);
 
 	//When
 	auto result1a = keyboard.GetKeyReleased('A');
@@ -432,8 +453,9 @@ TEST(KeyboardTest, GetKeyReleased_OneKeyIsDownThanUpSecondIsUpThanDown_ReturnTru
 }
 TEST(KeyboardTest, GetKeyReleased_TooSmallKeyCode_ThrowException) {
 	//Given
-	SystemKeyboardMock systemKeyboardMock;
-	Keyboard keyboard = Keyboard(systemKeyboardMock);
+	auto systemKeyboardMock = std::make_shared<SystemKeyboardMock>();
+	Keyboard keyboard = Keyboard();
+	keyboard.SetSystemKeyboard(systemKeyboardMock);
 
 	//When
 	try {
@@ -452,8 +474,9 @@ TEST(KeyboardTest, GetKeyReleased_TooSmallKeyCode_ThrowException) {
 }
 TEST(KeyboardTest, GetKeyReleased_TooLargeKeyCode_ThrowException) {
 	//Given
-	SystemKeyboardMock systemKeyboardMock;
-	Keyboard keyboard = Keyboard(systemKeyboardMock);
+	auto systemKeyboardMock = std::make_shared<SystemKeyboardMock>();
+	Keyboard keyboard = Keyboard();
+	keyboard.SetSystemKeyboard(systemKeyboardMock);
 
 	//When
 	try {
