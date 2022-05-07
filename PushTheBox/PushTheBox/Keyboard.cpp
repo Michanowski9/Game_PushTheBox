@@ -3,7 +3,7 @@
 Keyboard::Keyboard(SystemKeyboard& systemKeyboard)
 	: systemKeyboard(systemKeyboard)
 {
-	for (int i = 0; i < this->GetLastKeyStateSize(); i++)
+	for (int i = 0; i < KEYBOARD_SIZE; i++)
 	{
 		lastKeyState[i] = false;
 	}
@@ -11,16 +11,25 @@ Keyboard::Keyboard(SystemKeyboard& systemKeyboard)
 
 const bool Keyboard::GetKeyDown(int keyCode) const
 {
+	if (isOutOfRange(keyCode)) {
+		throw std::out_of_range("Out of range");
+	}
 	return systemKeyboard.GetKeyState(keyCode);
 }
 
 const bool Keyboard::GetKeyUp(int keyCode) const
 {
+	if (isOutOfRange(keyCode)) {
+		throw std::out_of_range("Out of range");
+	}
 	return !systemKeyboard.GetKeyState(keyCode);
 }
 
 const bool Keyboard::GetKeyPressed(int keyCode)
 {
+	if (isOutOfRange(keyCode)) {
+		throw std::out_of_range("Out of range");
+	}
 	bool result = false;
 	bool keyState = systemKeyboard.GetKeyState(keyCode);
 	if (keyState && !lastKeyState[keyCode]) {
@@ -32,6 +41,9 @@ const bool Keyboard::GetKeyPressed(int keyCode)
 
 const bool Keyboard::GetKeyReleased(int keyCode)
 {
+	if (isOutOfRange(keyCode)) {
+		throw std::out_of_range("Out of range");
+	}
 	bool result = false;
 	bool keyState = systemKeyboard.GetKeyState(keyCode);
 	if (!keyState && lastKeyState[keyCode]) {
@@ -41,7 +53,7 @@ const bool Keyboard::GetKeyReleased(int keyCode)
 	return result;
 }
 
-int Keyboard::GetLastKeyStateSize()
+const bool Keyboard::isOutOfRange(int keyCode) const
 {
-	return sizeof(lastKeyState) / sizeof(bool);
+	return keyCode < 0 || keyCode >= KEYBOARD_SIZE;
 }
