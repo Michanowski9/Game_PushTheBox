@@ -6,17 +6,23 @@
 #include "Constants.h"
 
 #include "GraphicsEngine.h"
+#include <memory>
 
 class Player
 {
 public:
-	Player(GraphicsEngine& graphicsEngine);
+	Player();
 	~Player() = default;
+
+	void SetGraphicsEngine(GraphicsEnginePtr graphicsEnginePtr);
+
 	void Draw() const;
 	void SetPosition(int x, int y);
 private:
 	Point position;
-	GraphicsEngine& graphicsEngine;
+	GraphicsEnginePtr graphicsEnginePtr;
 };
+
+using PlayerPtr = std::shared_ptr<Player>;
 
 #endif // !_PLAYER_H_

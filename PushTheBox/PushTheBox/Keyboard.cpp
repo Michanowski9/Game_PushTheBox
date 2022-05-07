@@ -1,7 +1,6 @@
 #include "Keyboard.h"
 
-Keyboard::Keyboard(SystemKeyboard& systemKeyboard)
-	: systemKeyboard(systemKeyboard)
+Keyboard::Keyboard()
 {
 	for (int i = 0; i < KEYBOARD_SIZE; i++)
 	{
@@ -9,12 +8,17 @@ Keyboard::Keyboard(SystemKeyboard& systemKeyboard)
 	}
 }
 
+void Keyboard::SetSystemKeyboard(SystemKeyboardPtr systemKeyboardPtr)
+{
+	this->systemKeyboardPtr = systemKeyboardPtr;
+}
+
 const bool Keyboard::GetKeyDown(int keyCode) const
 {
 	if (isOutOfRange(keyCode)) {
 		throw std::out_of_range("Out of range");
 	}
-	return systemKeyboard.GetKeyState(keyCode);
+	return systemKeyboardPtr->GetKeyState(keyCode);
 }
 
 const bool Keyboard::GetKeyUp(int keyCode) const
@@ -22,7 +26,7 @@ const bool Keyboard::GetKeyUp(int keyCode) const
 	if (isOutOfRange(keyCode)) {
 		throw std::out_of_range("Out of range");
 	}
-	return !systemKeyboard.GetKeyState(keyCode);
+	return !systemKeyboardPtr->GetKeyState(keyCode);
 }
 
 const bool Keyboard::GetKeyPressed(int keyCode)
@@ -31,7 +35,7 @@ const bool Keyboard::GetKeyPressed(int keyCode)
 		throw std::out_of_range("Out of range");
 	}
 	bool result = false;
-	bool keyState = systemKeyboard.GetKeyState(keyCode);
+	bool keyState = systemKeyboardPtr->GetKeyState(keyCode);
 	if (keyState && !lastKeyState[keyCode]) {
 		result = true;
 	}
@@ -45,7 +49,7 @@ const bool Keyboard::GetKeyReleased(int keyCode)
 		throw std::out_of_range("Out of range");
 	}
 	bool result = false;
-	bool keyState = systemKeyboard.GetKeyState(keyCode);
+	bool keyState = systemKeyboardPtr->GetKeyState(keyCode);
 	if (!keyState && lastKeyState[keyCode]) {
 		result = true;
 	}

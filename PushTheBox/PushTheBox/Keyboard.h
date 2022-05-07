@@ -11,9 +11,11 @@
 
 class Keyboard : public InputHandler
 {
-public:		
-	Keyboard(SystemKeyboard& systemKeyboard);
+public:
+	Keyboard();
 	~Keyboard() = default;
+	void SetSystemKeyboard(SystemKeyboardPtr systemKeyboardPtr);
+
 	const bool GetKeyDown(int keyCode) const override;
 	const bool GetKeyUp(int keyCode) const override;
 	const bool GetKeyPressed(int keyCode) override;
@@ -22,7 +24,7 @@ public:
 private:
 	const bool isOutOfRange(int keyCode) const;
 
-	SystemKeyboard& systemKeyboard;
+	SystemKeyboardPtr systemKeyboardPtr;
 	bool lastKeyState[KEYBOARD_SIZE] = {};
 };
 

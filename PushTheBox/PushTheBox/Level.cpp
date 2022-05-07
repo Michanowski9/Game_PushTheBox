@@ -1,15 +1,18 @@
 #include "Level.h"
 
-Level::Level(GraphicsEngine& graphicsEngine, Player& player)
-	: graphicsEngine(graphicsEngine),
-		player(player)
-{
-	map = nullptr;
-}
-
 Level::~Level()
 {
 	FreeMemMap();
+}
+
+void Level::SetGraphicsEngine(GraphicsEnginePtr graphicsEnginePtr)
+{
+	this->graphicsEnginePtr = graphicsEnginePtr;
+}
+
+void Level::SetPlayer(PlayerPtr playerPtr)
+{
+	this->playerPtr = playerPtr;
 }
 
 void Level::LoadDefaultMap()
@@ -30,7 +33,7 @@ void Level::LoadDefaultMap()
 			}
 		}
 	}
-	player.SetPosition(5, 5);
+	playerPtr->SetPosition(5, 5);
 }
 
 void Level::DrawMap() const
@@ -39,7 +42,7 @@ void Level::DrawMap() const
 	{
 		for (int x = 0; x < mapSize.x; x++)
 		{
-			graphicsEngine.DrawCell(x, y, map[x][y]);
+			graphicsEnginePtr->DrawCell(x, y, map[x][y]);
 		}
 	}
 }

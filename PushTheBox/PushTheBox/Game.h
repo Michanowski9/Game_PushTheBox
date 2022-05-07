@@ -10,8 +10,16 @@ class Game
 {
 public:
 	Game() = default;
-	Game(GraphicsEngine& graphicsEngine, InputHandler& inputHandler);
 	~Game() = default;
+
+	void SetGraphicsEngine(GraphicsEnginePtr graphicsEnginePtr);
+	void SetInputHandler(InputHandlerPtr inputHandlerPtr);
+	void SetLevel(LevelPtr levelPtr);
+	void SetPlayer(PlayerPtr playerPtr);
+
+	void SetLevel();
+	void SetPlayer();
+
 	void MainLoop();
 
 private:
@@ -19,11 +27,13 @@ private:
 	void Update();
 	void Render();
 
-	Level level;
-	Player player;
+	LevelPtr levelPtr;
+	PlayerPtr playerPtr;
 
-	InputHandler& inputHandler;
-	GraphicsEngine& graphicsEngine;
+	InputHandlerPtr inputHandlerPtr;
+	GraphicsEnginePtr graphicsEnginePtr;
 };
+
+using GamePtr = std::shared_ptr<Game>;
 
 #endif // !_GAME_H_
