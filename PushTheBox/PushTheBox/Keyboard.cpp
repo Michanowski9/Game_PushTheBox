@@ -5,7 +5,7 @@ Keyboard::Keyboard(SystemKeyboard& systemKeyboard)
 {
 	for (int i = 0; i < this->GetLastKeyStateSize(); i++)
 	{
-		lastKeyState[i] = 0;
+		lastKeyState[i] = false;
 	}
 }
 
