@@ -4,6 +4,9 @@
 #include "InputHandler.h"
 #include "SystemKeyboard.h"
 
+#include <stdexcept>
+
+//keyboard size set to 255 - probably all of keyCodes
 #define KEYBOARD_SIZE 0xFF
 
 class Keyboard : public InputHandler
@@ -16,9 +19,9 @@ public:
 	const bool GetKeyPressed(int keyCode) override;
 	const bool GetKeyReleased(int keyCode) override;
 
-
 private:
-	int GetLastKeyStateSize();
+	const bool isOutOfRange(int keyCode) const;
+
 	SystemKeyboard& systemKeyboard;
 	bool lastKeyState[KEYBOARD_SIZE] = {};
 };

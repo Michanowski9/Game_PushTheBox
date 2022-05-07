@@ -37,6 +37,46 @@ TEST(KeyboardTest, GetKeyDown_KeyIsUp_ReturnFalse) {
 	//Then
 	ASSERT_FALSE(result);
 }
+TEST(KeyboardTest, GetKeyDown_TooSmallKeyCode_ThrowException) {
+	//Given
+	SystemKeyboardMock systemKeyboardMock;
+	Keyboard keyboard = Keyboard(systemKeyboardMock);
+
+	//When
+	try {
+		keyboard.GetKeyDown(-1);
+
+		//Then
+		FAIL() << "Expected out of range";
+	}
+	catch (const std::out_of_range& e) {
+		EXPECT_EQ(e.what(), std::string("Out of range"));
+	}
+	catch (...) {
+		FAIL() << "Expected out of range";
+	}
+
+}
+TEST(KeyboardTest, GetKeyDown_TooLargeKeyCode_ThrowException) {
+	//Given
+	SystemKeyboardMock systemKeyboardMock;
+	Keyboard keyboard = Keyboard(systemKeyboardMock);
+
+	//When
+	try {
+		keyboard.GetKeyDown(100000);
+
+		//Then
+		FAIL() << "Expected out of range";
+	}
+	catch (const std::out_of_range& e) {
+		EXPECT_EQ(e.what(), std::string("Out of range"));
+	}
+	catch (...) {
+		FAIL() << "Expected out of range";
+	}
+
+}
 
 TEST(KeyboardTest, GetKeyUp_KeyIsDown_ReturnFalse) {
 	//Given
@@ -65,6 +105,46 @@ TEST(KeyboardTest, GetKeyUp_KeyIsUp_ReturnTrue) {
 
 	//Then
 	ASSERT_TRUE(result);
+}
+TEST(KeyboardTest, GetKeyUp_TooSmallKeyCode_ThrowException) {
+	//Given
+	SystemKeyboardMock systemKeyboardMock;
+	Keyboard keyboard = Keyboard(systemKeyboardMock);
+
+	//When
+	try {
+		keyboard.GetKeyUp(-1);
+
+		//Then
+		FAIL() << "Expected out of range";
+	}
+	catch (const std::out_of_range& e) {
+		EXPECT_EQ(e.what(), std::string("Out of range"));
+	}
+	catch (...) {
+		FAIL() << "Expected out of range";
+	}
+
+}
+TEST(KeyboardTest, GetKeyUp_TooLargeKeyCode_ThrowException) {
+	//Given
+	SystemKeyboardMock systemKeyboardMock;
+	Keyboard keyboard = Keyboard(systemKeyboardMock);
+
+	//When
+	try {
+		keyboard.GetKeyUp(100000);
+
+		//Then
+		FAIL() << "Expected out of range";
+	}
+	catch (const std::out_of_range& e) {
+		EXPECT_EQ(e.what(), std::string("Out of range"));
+	}
+	catch (...) {
+		FAIL() << "Expected out of range";
+	}
+
 }
 
 TEST(KeyboardTest, GetKeyPressed_KeyIsUpThanDown_ReturnTrue) {
@@ -197,6 +277,46 @@ TEST(KeyboardTest, GetKeyPressed_OneKeyIsDownThanUpSecondIsUpThanDown_ReturnFals
 	EXPECT_FALSE(result2a);
 	EXPECT_TRUE(result2b);
 }
+TEST(KeyboardTest, GetKeyPressed_TooSmallKeyCode_ThrowException) {
+	//Given
+	SystemKeyboardMock systemKeyboardMock;
+	Keyboard keyboard = Keyboard(systemKeyboardMock);
+
+	//When
+	try {
+		keyboard.GetKeyPressed(-1);
+
+		//Then
+		FAIL() << "Expected out of range";
+	}
+	catch (const std::out_of_range& e) {
+		EXPECT_EQ(e.what(), std::string("Out of range"));
+	}
+	catch (...) {
+		FAIL() << "Expected out of range";
+	}
+
+}
+TEST(KeyboardTest, GetKeyPressed_TooLargeKeyCode_ThrowException) {
+	//Given
+	SystemKeyboardMock systemKeyboardMock;
+	Keyboard keyboard = Keyboard(systemKeyboardMock);
+
+	//When
+	try {
+		keyboard.GetKeyPressed(100000);
+
+		//Then
+		FAIL() << "Expected out of range";
+	}
+	catch (const std::out_of_range& e) {
+		EXPECT_EQ(e.what(), std::string("Out of range"));
+	}
+	catch (...) {
+		FAIL() << "Expected out of range";
+	}
+
+}
 
 TEST(KeyboardTest, GetKeyReleased_KeyIsDownThanUp_ReturnTrue) {
 	//Given
@@ -309,4 +429,44 @@ TEST(KeyboardTest, GetKeyReleased_OneKeyIsDownThanUpSecondIsUpThanDown_ReturnTru
 
 	EXPECT_TRUE(result2a);
 	EXPECT_FALSE(result2b);
+}
+TEST(KeyboardTest, GetKeyReleased_TooSmallKeyCode_ThrowException) {
+	//Given
+	SystemKeyboardMock systemKeyboardMock;
+	Keyboard keyboard = Keyboard(systemKeyboardMock);
+
+	//When
+	try {
+		keyboard.GetKeyReleased(-1);
+
+		//Then
+		FAIL() << "Expected out of range";
+	}
+	catch (const std::out_of_range& e) {
+		EXPECT_EQ(e.what(), std::string("Out of range"));
+	}
+	catch (...) {
+		FAIL() << "Expected out of range";
+	}
+
+}
+TEST(KeyboardTest, GetKeyReleased_TooLargeKeyCode_ThrowException) {
+	//Given
+	SystemKeyboardMock systemKeyboardMock;
+	Keyboard keyboard = Keyboard(systemKeyboardMock);
+
+	//When
+	try {
+		keyboard.GetKeyReleased(100000);
+
+		//Then
+		FAIL() << "Expected out of range";
+	}
+	catch (const std::out_of_range& e) {
+		EXPECT_EQ(e.what(), std::string("Out of range"));
+	}
+	catch (...) {
+		FAIL() << "Expected out of range";
+	}
+
 }
