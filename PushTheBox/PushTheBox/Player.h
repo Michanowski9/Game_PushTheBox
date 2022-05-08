@@ -18,6 +18,11 @@ public:
 
 	void Draw() const;
 	void SetPosition(int x, int y);
+
+	void MoveUpIfPossible();
+	void MoveDownIfPossible();
+	void MoveLeftIfPossible();
+	void MoveRightIfPossible();
 private:
 	Point position;
 	GraphicsEnginePtr graphicsEnginePtr;

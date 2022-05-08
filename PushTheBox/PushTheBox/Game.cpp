@@ -45,7 +45,24 @@ void Game::MainLoop()
 
 void Game::HandleInput()
 {
-	//TODO
+	if (inputHandlerPtr->GetKeyPressed(KEY::UP)) {
+		playerPtr->MoveUpIfPossible();
+	}
+	if (inputHandlerPtr->GetKeyPressed(KEY::DOWN)) {
+		playerPtr->MoveDownIfPossible();
+	}
+	if (inputHandlerPtr->GetKeyPressed(KEY::LEFT)) {
+		playerPtr->MoveLeftIfPossible();
+	}
+	if (inputHandlerPtr->GetKeyPressed(KEY::RIGHT)) {
+		playerPtr->MoveRightIfPossible();
+	}
+	if (inputHandlerPtr->GetKeyPressed(KEY::RESET)) {
+
+	}
+	if (inputHandlerPtr->GetKeyPressed(KEY::EXIT)) {
+
+	}
 }
 
 void Game::Update()

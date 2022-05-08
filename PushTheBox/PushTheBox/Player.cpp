@@ -21,3 +21,23 @@ void Player::SetPosition(int x, int y)
 	position.x = x;
 	position.y = y;
 }
+
+void Player::MoveUpIfPossible()
+{
+	position.y--;
+}
+
+void Player::MoveDownIfPossible()
+{
+	position.y++;
+}
+
+void Player::MoveLeftIfPossible()
+{
+	position.x--;
+}
+
+void Player::MoveRightIfPossible()
+{
+	position.x++;
+}
