@@ -8,4 +8,13 @@ namespace CELL {
 	const int BOX = 3;
 }
 
+namespace KEY {
+	const int UP = 0x26;
+	const int DOWN = 0x28;
+	const int LEFT = 0x25;
+	const int RIGHT = 0x27;
+	const int RESET = 'R';
+	const int EXIT = 'Q';
+}
+
 #endif // !_CONSTANTS_H_
