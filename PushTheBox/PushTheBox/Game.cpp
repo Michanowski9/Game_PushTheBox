@@ -39,7 +39,7 @@ void Game::MainLoop()
 {
 	levelPtr->DrawMap();
 	playerPtr->Draw();
-	while (!IsWin()) {
+	while (!IsWin() && !IsExit()) {
 		HandleInput();
 		Update();
 		Render();
@@ -61,10 +61,10 @@ void Game::HandleInput()
 		playerPtr->MoveRightIfPossible();
 	}
 	if (inputHandlerPtr->GetKeyPressed(KEY::RESET)) {
-
+		
 	}
 	if (inputHandlerPtr->GetKeyPressed(KEY::EXIT)) {
-
+		isExit = true;
 	}
 }
 
@@ -85,4 +85,9 @@ const bool Game::IsWin() const
 		return false;
 	}
 	return true;
+}
+
+const bool Game::IsExit() const
+{
+	return isExit;
 }

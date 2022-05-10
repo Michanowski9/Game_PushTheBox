@@ -27,6 +27,8 @@ private:
 	void Update();
 	void Render();
 	const bool IsWin() const;
+	const bool IsExit() const;
+	bool isExit = false;
 
 	LevelPtr levelPtr;
 	PlayerPtr playerPtr;
