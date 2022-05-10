@@ -31,6 +31,7 @@ void Game::SetPlayer()
 	playerPtr = std::make_shared<Player>();
 	playerPtr->SetGraphicsEngine(graphicsEnginePtr);
 	levelPtr->SetPlayer(playerPtr);
+	playerPtr->SetMap(levelPtr);
 	levelPtr->LoadDefaultMap();
 }
 
