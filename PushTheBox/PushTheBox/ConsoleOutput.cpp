@@ -39,6 +39,8 @@ const byte ConsoleOutput::CellToColor(int cell) const
 		return COLORS::RED;
 	case CELL::BOX:
 		return COLORS::GREEN;
+	case CELL::TARGET:
+		return COLORS::TURQUOISE;
 	default:
 		return COLORS::BLACK;
 	}

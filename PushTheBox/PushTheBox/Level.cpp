@@ -104,6 +104,7 @@ void Level::LoadDefaultMap()
 		}
 	}
 	map[3][3] = CELL::BOX;
+	map[10][4] = CELL::TARGET;
 	playerPtr->SetPosition(5, 5);
 }
 
