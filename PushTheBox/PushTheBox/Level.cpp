@@ -23,6 +23,30 @@ const bool Level::IsEmptyCell(int x, int y) const
 	return false;
 }
 
+const bool Level::IsBoxOnField(int x, int y) const
+{
+	if (map[x][y] == CELL::BOX) {
+		return true;
+	}
+	return false;
+}
+
+void Level::MoveBoxUp(int boxX, int boxY)
+{
+}
+
+void Level::MoveBoxDown(int boxX, int boxY)
+{
+}
+
+void Level::MoveBoxLeft(int boxX, int boxY)
+{
+}
+
+void Level::MoveBoxRight(int boxX, int boxY)
+{
+}
+
 void Level::LoadDefaultMap()
 {
 	SetMapSize(20, 10);
@@ -41,6 +65,7 @@ void Level::LoadDefaultMap()
 			}
 		}
 	}
+	map[3][3] = CELL::BOX;
 	playerPtr->SetPosition(5, 5);
 }
 

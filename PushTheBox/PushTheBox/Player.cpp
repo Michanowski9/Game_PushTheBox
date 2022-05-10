@@ -34,32 +34,57 @@ const Point Player::GetPosition()
 
 void Player::MoveUpIfPossible()
 {
-	if (!mapPtr->IsEmptyCell(position.x, position.y - 1)) {
+	if (mapPtr->IsEmptyCell(position.x, position.y - 1)) {
+		position.y--;
 		return;
 	}
-	position.y--;
+	else if (mapPtr->IsBoxOnField(position.x, position.y - 1) 
+			&& mapPtr->IsEmptyCell(position.x, position.y - 2)) {
+		mapPtr->MoveBoxUp(position.x, position.y - 1);
+		position.y--;
+		return;
+	}
 }
 
 void Player::MoveDownIfPossible()
 {
-	if (!mapPtr->IsEmptyCell(position.x, position.y + 1)) {
+	if (mapPtr->IsEmptyCell(position.x, position.y + 1)) {
+		position.y++;
 		return;
 	}
-	position.y++;
+	else if (mapPtr->IsBoxOnField(position.x, position.y + 1)
+		&& mapPtr->IsEmptyCell(position.x, position.y + 2)) {
+		mapPtr->MoveBoxDown(position.x, position.y + 1);
+		position.y++;
+		return;
+	}
 }
 
 void Player::MoveLeftIfPossible()
 {
-	if (!mapPtr->IsEmptyCell(position.x - 1, position.y)) {
+	if (mapPtr->IsEmptyCell(position.x - 1, position.y)) {
+		position.x--;
 		return;
 	}
-	position.x--;
+	else if (mapPtr->IsBoxOnField(position.x - 1, position.y)
+		&& mapPtr->IsEmptyCell(position.x - 2, position.y)) {
+		mapPtr->MoveBoxLeft(position.x - 1, position.y);
+		position.x--;
+		return;
+	}
 }
 
 void Player::MoveRightIfPossible()
 {
-	if (!mapPtr->IsEmptyCell(position.x + 1, position.y)) {
+
+	if (mapPtr->IsEmptyCell(position.x + 1, position.y)) {
+		position.x++;
 		return;
 	}
-	position.x++;
+	else if (mapPtr->IsBoxOnField(position.x + 1, position.y)
+		&& mapPtr->IsEmptyCell(position.x + 2, position.y)) {
+		mapPtr->MoveBoxRight(position.x + 1, position.y);
+		position.x++;
+		return;
+	}
 }
