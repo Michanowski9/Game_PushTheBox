@@ -22,7 +22,7 @@ void Level::SetPlayer(PlayerPtr playerPtr)
 
 const bool Level::IsEmptyCell(int x, int y) const
 {
-	if (map[x][y] == CELL::EMPTY) {
+	if (map[x][y] == CELL::EMPTY || map[x][y] == CELL::TARGET) {
 		return true;
 	}
 	return false;
@@ -38,51 +38,70 @@ const bool Level::IsBoxOnField(int x, int y) const
 
 void Level::MoveBoxUp(int boxX, int boxY)
 {
-	if (map[boxX][boxY - 1] != CELL::EMPTY) {
-		return;
+	if (map[boxX][boxY - 1] == CELL::TARGET) {
+		SetField(boxX, boxY, CELL::EMPTY);
+		SetField(boxX, boxY - 1, CELL::BOX_ON_TARGET);
 	}
-	map[boxX][boxY] = CELL::EMPTY;
-	fieldsToRefresh.push(Point(boxX, boxY));
-	map[boxX][boxY - 1] = CELL::BOX;
-	fieldsToRefresh.push(Point(boxX, boxY - 1));
+	else if (map[boxX][boxY - 1] == CELL::EMPTY) {
+		SetField(boxX, boxY, CELL::EMPTY);
+		SetField(boxX, boxY - 1, CELL::BOX);
+	}
 }
 
 void Level::MoveBoxDown(int boxX, int boxY)
 {
-	if (map[boxX][boxY + 1] != CELL::EMPTY) {
-		return;
+	if (map[boxX][boxY + 1] == CELL::TARGET) {
+		SetField(boxX, boxY, CELL::EMPTY);
+		SetField(boxX, boxY + 1, CELL::BOX_ON_TARGET);
 	}
-	map[boxX][boxY] = CELL::EMPTY;
-	fieldsToRefresh.push(Point(boxX, boxY));
-	map[boxX][boxY + 1] = CELL::BOX;
-	fieldsToRefresh.push(Point(boxX, boxY + 1));
+	else if (map[boxX][boxY + 1] == CELL::EMPTY) {
+		SetField(boxX, boxY, CELL::EMPTY);
+		SetField(boxX, boxY + 1, CELL::BOX);
+	}
 }
 
 void Level::MoveBoxLeft(int boxX, int boxY)
 {
-	if (map[boxX - 1][boxY] != CELL::EMPTY) {
-		return;
+	if (map[boxX - 1][boxY] == CELL::TARGET) {
+		SetField(boxX, boxY, CELL::EMPTY);
+		SetField(boxX - 1, boxY, CELL::BOX_ON_TARGET);
 	}
-	map[boxX][boxY] = CELL::EMPTY;
-	fieldsToRefresh.push(Point(boxX, boxY));
-	map[boxX - 1][boxY] = CELL::BOX;
-	fieldsToRefresh.push(Point(boxX - 1, boxY));
+	else if (map[boxX - 1][boxY] == CELL::EMPTY) {
+		SetField(boxX, boxY, CELL::EMPTY);
+		SetField(boxX - 1, boxY, CELL::BOX);
+	}
 }
 
 void Level::MoveBoxRight(int boxX, int boxY)
 {
-	if (map[boxX + 1][boxY] != CELL::EMPTY) {
-		return;
+	if (map[boxX + 1][boxY] == CELL::TARGET) {
+		SetField(boxX, boxY, CELL::EMPTY);
+		SetField(boxX + 1, boxY, CELL::BOX_ON_TARGET);
 	}
-	map[boxX][boxY] = CELL::EMPTY;
-	fieldsToRefresh.push(Point(boxX, boxY));
-	map[boxX + 1][boxY] = CELL::BOX;
-	fieldsToRefresh.push(Point(boxX + 1, boxY));
+	else if (map[boxX + 1][boxY] == CELL::EMPTY) {
+		SetField(boxX, boxY, CELL::EMPTY);
+		SetField(boxX + 1, boxY, CELL::BOX);
+	}
 }
 
 void Level::AddFieldToRefresh(int x, int y)
 {
 	fieldsToRefresh.push(Point(x, y));
+}
+
+const int Level::GetNumberOfTargets() const
+{
+	int result = 0;
+	for (int x = 0; x < mapSize.x; x++)
+	{
+		for (int y = 0; y < mapSize.y; y++)
+		{
+			if (map[x][y] == CELL::TARGET) {
+				result++;
+			}
+		}
+	}
+	return result;
 }
 
 void Level::LoadDefaultMap()
@@ -104,6 +123,7 @@ void Level::LoadDefaultMap()
 		}
 	}
 	map[3][3] = CELL::BOX;
+	map[10][4] = CELL::TARGET;
 	playerPtr->SetPosition(5, 5);
 }
 
@@ -126,6 +146,12 @@ void Level::RefreshPartOfMap()
 		fieldsToRefresh.pop();
 		graphicsEnginePtr->DrawCell(field.x, field.y, map[field.x][field.y]);
 	}
+}
+
+void Level::SetField(int x, int y, int field)
+{
+	map[x][y] = field;
+	fieldsToRefresh.push(Point(x, y));
 }
 
 void Level::SetMapSize(int x, int y)

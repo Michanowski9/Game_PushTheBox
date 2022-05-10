@@ -6,6 +6,8 @@ namespace CELL {
 	const int WALL = 1;
 	const int PLAYER = 2;
 	const int BOX = 3;
+	const int TARGET = 4;
+	const int BOX_ON_TARGET = 5;
 }
 
 namespace KEY {

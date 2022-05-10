@@ -31,10 +31,13 @@ public:
 
 	void AddFieldToRefresh(int x, int y) override;
 
+	const int GetNumberOfTargets() const;
+
 	void LoadDefaultMap();
 	void DrawMap() const;
 	void RefreshPartOfMap();
 private:
+	void SetField(int x, int y, int field);
 	void SetMapSize(int x, int y);
 	void FreeMemMap();
 

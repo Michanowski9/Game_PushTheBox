@@ -26,6 +26,7 @@ private:
 	void HandleInput();
 	void Update();
 	void Render();
+	const bool IsWin() const;
 
 	LevelPtr levelPtr;
 	PlayerPtr playerPtr;
