@@ -31,7 +31,7 @@ public:
 	std::shared_ptr<GraphicsEngineMock> graphicsEngineMock;
 };
 
-TEST_F(PlayerTest, MoveUpI1fPossible_EmptyCell_Move) {
+TEST_F(PlayerTest, MoveUpIfPossible_EmptyCell_Move) {
 	//Given
 	player.SetPosition(2, 2);
 	EXPECT_CALL(*mapMock, IsEmptyCell(2, 1))
@@ -63,7 +63,7 @@ TEST_F(PlayerTest, MoveUpIfPossible_WallInCell_NotMove) {
 	EXPECT_EQ(shouldBe.x, result.x);
 	EXPECT_EQ(shouldBe.y, result.y);
 }
-TEST_F(PlayerTest, MoveDownI1fPossible_EmptyCell_Move) {
+TEST_F(PlayerTest, MoveDownIfPossible_EmptyCell_Move) {
 	//Given
 	player.SetPosition(2, 2);
 	EXPECT_CALL(*mapMock, IsEmptyCell(2, 3))
@@ -95,7 +95,7 @@ TEST_F(PlayerTest, MoveDownIfPossible_WallInCell_NotMove) {
 	EXPECT_EQ(shouldBe.x, result.x);
 	EXPECT_EQ(shouldBe.y, result.y);
 }
-TEST_F(PlayerTest, MoveLeftI1fPossible_EmptyCell_Move) {
+TEST_F(PlayerTest, MoveLeftIfPossible_EmptyCell_Move) {
 	//Given
 	player.SetPosition(2, 2);
 	EXPECT_CALL(*mapMock, IsEmptyCell(1, 2))
@@ -127,7 +127,7 @@ TEST_F(PlayerTest, MoveLeftIfPossible_WallInCell_NotMove) {
 	EXPECT_EQ(shouldBe.x, result.x);
 	EXPECT_EQ(shouldBe.y, result.y);
 }
-TEST_F(PlayerTest, MoveRightI1fPossible_EmptyCell_Move) {
+TEST_F(PlayerTest, MoveRightIfPossible_EmptyCell_Move) {
 	//Given
 	player.SetPosition(2, 2);
 	EXPECT_CALL(*mapMock, IsEmptyCell(3, 2))
