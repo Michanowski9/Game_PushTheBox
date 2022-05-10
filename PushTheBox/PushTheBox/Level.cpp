@@ -33,18 +33,38 @@ const bool Level::IsBoxOnField(int x, int y) const
 
 void Level::MoveBoxUp(int boxX, int boxY)
 {
+	if (map[boxX][boxY - 1] != CELL::EMPTY) {
+		return;
+	}
+	map[boxX][boxY] = CELL::EMPTY;
+	map[boxX][boxY - 1] = CELL::BOX;
 }
 
 void Level::MoveBoxDown(int boxX, int boxY)
 {
+	if (map[boxX][boxY + 1] != CELL::EMPTY) {
+		return;
+	}
+	map[boxX][boxY] = CELL::EMPTY;
+	map[boxX][boxY + 1] = CELL::BOX;
 }
 
 void Level::MoveBoxLeft(int boxX, int boxY)
 {
+	if (map[boxX - 1][boxY] != CELL::EMPTY) {
+		return;
+	}
+	map[boxX][boxY] = CELL::EMPTY;
+	map[boxX - 1][boxY] = CELL::BOX;
 }
 
 void Level::MoveBoxRight(int boxX, int boxY)
 {
+	if (map[boxX + 1][boxY] != CELL::EMPTY) {
+		return;
+	}
+	map[boxX][boxY] = CELL::EMPTY;
+	map[boxX + 1][boxY] = CELL::BOX;
 }
 
 void Level::LoadDefaultMap()

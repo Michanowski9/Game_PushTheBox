@@ -19,8 +19,10 @@ public:
 
 	void SetGraphicsEngine(GraphicsEnginePtr graphicsEnginePtr);
 	void SetPlayer(PlayerPtr playerPtr);
+
 	const bool IsEmptyCell(int x, int y) const override;
 	const bool IsBoxOnField(int x, int y) const override;
+
 	void MoveBoxUp(int boxX, int boxY) override;
 	void MoveBoxDown(int boxX, int boxY) override;
 	void MoveBoxLeft(int boxX, int boxY) override;
