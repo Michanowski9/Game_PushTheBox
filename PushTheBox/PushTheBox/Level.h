@@ -35,6 +35,7 @@ public:
 	void DrawMap() const;
 	void RefreshPartOfMap();
 private:
+	void SetField(int x, int y, int field);
 	void SetMapSize(int x, int y);
 	void FreeMemMap();
 
