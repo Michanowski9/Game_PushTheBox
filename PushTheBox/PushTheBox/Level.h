@@ -31,6 +31,8 @@ public:
 
 	void AddFieldToRefresh(int x, int y) override;
 
+	const int GetNumberOfTargets() const;
+
 	void LoadDefaultMap();
 	void DrawMap() const;
 	void RefreshPartOfMap();

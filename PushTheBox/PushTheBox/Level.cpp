@@ -89,6 +89,21 @@ void Level::AddFieldToRefresh(int x, int y)
 	fieldsToRefresh.push(Point(x, y));
 }
 
+const int Level::GetNumberOfTargets() const
+{
+	int result = 0;
+	for (int x = 0; x < mapSize.x; x++)
+	{
+		for (int y = 0; y < mapSize.y; y++)
+		{
+			if (map[x][y] == CELL::TARGET) {
+				result++;
+			}
+		}
+	}
+	return result;
+}
+
 void Level::LoadDefaultMap()
 {
 	SetMapSize(20, 10);

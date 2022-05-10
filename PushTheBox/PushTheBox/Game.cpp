@@ -39,7 +39,7 @@ void Game::MainLoop()
 {
 	levelPtr->DrawMap();
 	playerPtr->Draw();
-	while (true) {
+	while (!IsWin()) {
 		HandleInput();
 		Update();
 		Render();
@@ -77,4 +77,12 @@ void Game::Render()
 {
 	levelPtr->RefreshPartOfMap();
 	playerPtr->DrawIfMoved();
+}
+
+const bool Game::IsWin() const
+{
+	if (levelPtr->GetNumberOfTargets() > 0) {
+		return false;
+	}
+	return true;
 }
