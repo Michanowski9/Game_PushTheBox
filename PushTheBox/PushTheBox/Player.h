@@ -19,6 +19,7 @@ public:
 	void SetMap(MapPtr mapPtr);
 
 	void Draw() const;
+	void DrawIfMoved();
 	void SetPosition(int x, int y);
 	const Point GetPosition();
 
@@ -26,7 +27,14 @@ public:
 	void MoveDownIfPossible();
 	void MoveLeftIfPossible();
 	void MoveRightIfPossible();
+
 private:
+	void MoveUp();
+	void MoveDown();
+	void MoveLeft();
+	void MoveRight();
+
+	bool ifMoved = false;
 	Point position;
 	MapPtr mapPtr;
 	GraphicsEnginePtr graphicsEnginePtr;

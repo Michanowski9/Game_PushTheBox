@@ -1,5 +1,10 @@
 #include "Level.h"
 
+Level::Level()
+{
+	fieldsToRefresh = std::queue<Point>();
+}
+
 Level::~Level()
 {
 	FreeMemMap();
@@ -37,7 +42,9 @@ void Level::MoveBoxUp(int boxX, int boxY)
 		return;
 	}
 	map[boxX][boxY] = CELL::EMPTY;
+	fieldsToRefresh.push(Point(boxX, boxY));
 	map[boxX][boxY - 1] = CELL::BOX;
+	fieldsToRefresh.push(Point(boxX, boxY - 1));
 }
 
 void Level::MoveBoxDown(int boxX, int boxY)
@@ -46,7 +53,9 @@ void Level::MoveBoxDown(int boxX, int boxY)
 		return;
 	}
 	map[boxX][boxY] = CELL::EMPTY;
+	fieldsToRefresh.push(Point(boxX, boxY));
 	map[boxX][boxY + 1] = CELL::BOX;
+	fieldsToRefresh.push(Point(boxX, boxY + 1));
 }
 
 void Level::MoveBoxLeft(int boxX, int boxY)
@@ -55,7 +64,9 @@ void Level::MoveBoxLeft(int boxX, int boxY)
 		return;
 	}
 	map[boxX][boxY] = CELL::EMPTY;
+	fieldsToRefresh.push(Point(boxX, boxY));
 	map[boxX - 1][boxY] = CELL::BOX;
+	fieldsToRefresh.push(Point(boxX - 1, boxY));
 }
 
 void Level::MoveBoxRight(int boxX, int boxY)
@@ -64,7 +75,14 @@ void Level::MoveBoxRight(int boxX, int boxY)
 		return;
 	}
 	map[boxX][boxY] = CELL::EMPTY;
+	fieldsToRefresh.push(Point(boxX, boxY));
 	map[boxX + 1][boxY] = CELL::BOX;
+	fieldsToRefresh.push(Point(boxX + 1, boxY));
+}
+
+void Level::AddFieldToRefresh(int x, int y)
+{
+	fieldsToRefresh.push(Point(x, y));
 }
 
 void Level::LoadDefaultMap()
@@ -97,6 +115,16 @@ void Level::DrawMap() const
 		{
 			graphicsEnginePtr->DrawCell(x, y, map[x][y]);
 		}
+	}
+}
+
+void Level::RefreshPartOfMap()
+{
+	while (fieldsToRefresh.size() > 0)
+	{
+		auto field = fieldsToRefresh.front();
+		fieldsToRefresh.pop();
+		graphicsEnginePtr->DrawCell(field.x, field.y, map[field.x][field.y]);
 	}
 }
 

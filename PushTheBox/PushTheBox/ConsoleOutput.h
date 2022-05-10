@@ -21,6 +21,7 @@ private:
 	void SetCursorPosition(int x, int y);
 	void SetColor(byte color);
 	const byte CellToColor(int cell) const;
+	void TurnOffCursor();
 	
 	HANDLE handle;
 	enum COLORS {
@@ -39,7 +40,7 @@ private:
 		LIGHT_RED = 207,
 		LIGHT_PURPLE = 223,
 		YELLOW = 224,
-		WHITE = 240
+		WHITE = 255
 	};
 };
 

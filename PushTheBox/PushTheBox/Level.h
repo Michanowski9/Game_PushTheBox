@@ -10,11 +10,12 @@
 
 #include <memory>
 #include "Map.h"
+#include <queue>
 
 class Level : public Map
 {
 public:
-	Level() = default;
+	Level();
 	~Level();
 
 	void SetGraphicsEngine(GraphicsEnginePtr graphicsEnginePtr);
@@ -28,11 +29,16 @@ public:
 	void MoveBoxLeft(int boxX, int boxY) override;
 	void MoveBoxRight(int boxX, int boxY) override;
 
+	void AddFieldToRefresh(int x, int y) override;
+
 	void LoadDefaultMap();
 	void DrawMap() const;
+	void RefreshPartOfMap();
 private:
 	void SetMapSize(int x, int y);
 	void FreeMemMap();
+
+	std::queue<Point> fieldsToRefresh;
 
 	Point mapSize;
 	int** map = nullptr;

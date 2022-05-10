@@ -11,6 +11,7 @@ public:
 	virtual void MoveBoxDown(int boxX, int boxY) = 0;
 	virtual void MoveBoxLeft(int boxX, int boxY) = 0;
 	virtual void MoveBoxRight(int boxX, int boxY) = 0;
+	virtual void AddFieldToRefresh(int x, int y) = 0;
 
 };
 

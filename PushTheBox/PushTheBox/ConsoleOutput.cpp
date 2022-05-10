@@ -3,6 +3,7 @@
 ConsoleOutput::ConsoleOutput()
 {
 	handle = GetStdHandle(STD_OUTPUT_HANDLE);
+	TurnOffCursor();
 }
 
 void ConsoleOutput::DrawCell(int x, int y, int cell)
@@ -41,4 +42,13 @@ const byte ConsoleOutput::CellToColor(int cell) const
 	default:
 		return COLORS::BLACK;
 	}
+}
+
+void ConsoleOutput::TurnOffCursor()
+{
+	CONSOLE_CURSOR_INFO     cursorInfo;
+
+	GetConsoleCursorInfo(handle, &cursorInfo);
+	cursorInfo.bVisible = false;
+	SetConsoleCursorInfo(handle, &cursorInfo);
 }
