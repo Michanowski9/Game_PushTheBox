@@ -22,7 +22,7 @@ void Level::SetPlayer(PlayerPtr playerPtr)
 
 const bool Level::IsEmptyCell(int x, int y) const
 {
-	if (map[x][y] == CELL::EMPTY) {
+	if (map[x][y] == CELL::EMPTY || map[x][y] == CELL::TARGET) {
 		return true;
 	}
 	return false;
