@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "../PushTheBox/Keyboard.h"
 #include "../PushTheBox/Keyboard.cpp"
-#include <iostream>
+
 using ::testing::Return;
 
 class SystemKeyboardMock : public SystemKeyboard {
@@ -26,7 +26,7 @@ public:
 	~KeyboardTest() {
 
 	}
-	std::shared_ptr< SystemKeyboardMock> systemKeyboardMock;
+	std::shared_ptr<SystemKeyboardMock> systemKeyboardMock;
 	Keyboard keyboard;
 };
 

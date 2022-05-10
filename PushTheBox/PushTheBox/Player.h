@@ -6,6 +6,7 @@
 #include "Constants.h"
 
 #include "GraphicsEngine.h"
+#include "Map.h"
 #include <memory>
 
 class Player
@@ -15,11 +16,19 @@ public:
 	~Player() = default;
 
 	void SetGraphicsEngine(GraphicsEnginePtr graphicsEnginePtr);
+	void SetMap(MapPtr mapPtr);
 
 	void Draw() const;
 	void SetPosition(int x, int y);
+	const Point GetPosition();
+
+	void MoveUpIfPossible();
+	void MoveDownIfPossible();
+	void MoveLeftIfPossible();
+	void MoveRightIfPossible();
 private:
 	Point position;
+	MapPtr mapPtr;
 	GraphicsEnginePtr graphicsEnginePtr;
 };
 

@@ -15,6 +15,58 @@ void Level::SetPlayer(PlayerPtr playerPtr)
 	this->playerPtr = playerPtr;
 }
 
+const bool Level::IsEmptyCell(int x, int y) const
+{
+	if (map[x][y] == CELL::EMPTY) {
+		return true;
+	}
+	return false;
+}
+
+const bool Level::IsBoxOnField(int x, int y) const
+{
+	if (map[x][y] == CELL::BOX) {
+		return true;
+	}
+	return false;
+}
+
+void Level::MoveBoxUp(int boxX, int boxY)
+{
+	if (map[boxX][boxY - 1] != CELL::EMPTY) {
+		return;
+	}
+	map[boxX][boxY] = CELL::EMPTY;
+	map[boxX][boxY - 1] = CELL::BOX;
+}
+
+void Level::MoveBoxDown(int boxX, int boxY)
+{
+	if (map[boxX][boxY + 1] != CELL::EMPTY) {
+		return;
+	}
+	map[boxX][boxY] = CELL::EMPTY;
+	map[boxX][boxY + 1] = CELL::BOX;
+}
+
+void Level::MoveBoxLeft(int boxX, int boxY)
+{
+	if (map[boxX - 1][boxY] != CELL::EMPTY) {
+		return;
+	}
+	map[boxX][boxY] = CELL::EMPTY;
+	map[boxX - 1][boxY] = CELL::BOX;
+}
+
+void Level::MoveBoxRight(int boxX, int boxY)
+{
+	if (map[boxX + 1][boxY] != CELL::EMPTY) {
+		return;
+	}
+	map[boxX][boxY] = CELL::EMPTY;
+	map[boxX + 1][boxY] = CELL::BOX;
+}
+
 void Level::LoadDefaultMap()
 {
 	SetMapSize(20, 10);
@@ -33,6 +85,7 @@ void Level::LoadDefaultMap()
 			}
 		}
 	}
+	map[3][3] = CELL::BOX;
 	playerPtr->SetPosition(5, 5);
 }
 

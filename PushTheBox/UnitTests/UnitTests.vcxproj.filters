@@ -5,7 +5,10 @@
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\lib\native\src\gtest\gtest-all.cc" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\lib\native\src\gmock\gmock-all.cc" />
-    <ClCompile Include="keyboardTest.cpp">
+    <ClCompile Include="KeyboardTest.cpp">
+      <Filter>Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerTest.cpp">
       <Filter>Tests</Filter>
     </ClCompile>
   </ItemGroup>
