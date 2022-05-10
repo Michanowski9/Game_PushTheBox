@@ -61,7 +61,9 @@ void Game::HandleInput()
 		playerPtr->MoveRightIfPossible();
 	}
 	if (inputHandlerPtr->GetKeyPressed(KEY::RESET)) {
-		
+		levelPtr->LoadDefaultMap();
+		levelPtr->DrawMap();
+		playerPtr->Draw();
 	}
 	if (inputHandlerPtr->GetKeyPressed(KEY::EXIT)) {
 		isExit = true;
@@ -70,7 +72,7 @@ void Game::HandleInput()
 
 void Game::Update()
 {
-	//TODO
+	//no actions to do without player input
 }
 
 void Game::Render()
