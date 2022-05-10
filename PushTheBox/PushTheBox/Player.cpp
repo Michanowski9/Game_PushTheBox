@@ -11,6 +11,11 @@ void Player::SetGraphicsEngine(GraphicsEnginePtr graphicsEnginePtr)
 	this->graphicsEnginePtr = graphicsEnginePtr;
 }
 
+void Player::SetMap(MapPtr mapPtr)
+{
+	this->mapPtr = mapPtr;
+}
+
 void Player::Draw() const
 {
 	graphicsEnginePtr->DrawCell(position.x, position.y, CELL::PLAYER);
@@ -22,8 +27,16 @@ void Player::SetPosition(int x, int y)
 	position.y = y;
 }
 
+const Point Player::GetPosition()
+{
+	return position;
+}
+
 void Player::MoveUpIfPossible()
 {
+	if (!mapPtr->IsEmptyCell(position.x, position.y - 1)) {
+		return;
+	}
 	position.y--;
 }
 

@@ -15,6 +15,11 @@ void Level::SetPlayer(PlayerPtr playerPtr)
 	this->playerPtr = playerPtr;
 }
 
+const bool Level::IsEmptyCell(int x, int y) const
+{
+	return false;
+}
+
 void Level::LoadDefaultMap()
 {
 	SetMapSize(20, 10);
