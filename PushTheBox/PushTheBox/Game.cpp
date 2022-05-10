@@ -37,6 +37,8 @@ void Game::SetPlayer()
 
 void Game::MainLoop()
 {
+	levelPtr->DrawMap();
+	playerPtr->Draw();
 	while (true) {
 		HandleInput();
 		Update();
@@ -73,6 +75,6 @@ void Game::Update()
 
 void Game::Render()
 {
-	levelPtr->DrawMap();
-	playerPtr->Draw();
+	levelPtr->RefreshPartOfMap();
+	playerPtr->DrawIfMoved();
 }

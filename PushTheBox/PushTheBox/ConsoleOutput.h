@@ -21,6 +21,7 @@ private:
 	void SetCursorPosition(int x, int y);
 	void SetColor(byte color);
 	const byte CellToColor(int cell) const;
+	void TurnOffCursor();
 	
 	HANDLE handle;
 	enum COLORS {
