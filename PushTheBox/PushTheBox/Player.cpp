@@ -42,15 +42,24 @@ void Player::MoveUpIfPossible()
 
 void Player::MoveDownIfPossible()
 {
+	if (!mapPtr->IsEmptyCell(position.x, position.y + 1)) {
+		return;
+	}
 	position.y++;
 }
 
 void Player::MoveLeftIfPossible()
 {
+	if (!mapPtr->IsEmptyCell(position.x - 1, position.y)) {
+		return;
+	}
 	position.x--;
 }
 
 void Player::MoveRightIfPossible()
 {
+	if (!mapPtr->IsEmptyCell(position.x + 1, position.y)) {
+		return;
+	}
 	position.x++;
 }

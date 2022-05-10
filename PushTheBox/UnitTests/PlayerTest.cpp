@@ -63,3 +63,99 @@ TEST_F(PlayerTest, MoveUpIfPossible_WallInCell_NotMove) {
 	EXPECT_EQ(shouldBe.x, result.x);
 	EXPECT_EQ(shouldBe.y, result.y);
 }
+TEST_F(PlayerTest, MoveDownI1fPossible_EmptyCell_Move) {
+	//Given
+	player.SetPosition(2, 2);
+	EXPECT_CALL(*mapMock, IsEmptyCell(2, 3))
+		.WillOnce(Return(true));
+
+	Point shouldBe(2, 3);
+
+	//When
+	player.MoveDownIfPossible();
+
+	//Then
+	auto result = player.GetPosition();
+	EXPECT_EQ(shouldBe.x, result.x);
+	EXPECT_EQ(shouldBe.y, result.y);
+}
+TEST_F(PlayerTest, MoveDownIfPossible_WallInCell_NotMove) {
+	//Given
+	player.SetPosition(2, 2);
+	EXPECT_CALL(*mapMock, IsEmptyCell(2, 3))
+		.WillOnce(Return(false));
+
+	Point shouldBe(2, 2);
+
+	//When
+	player.MoveDownIfPossible();
+
+	//Then
+	auto result = player.GetPosition();
+	EXPECT_EQ(shouldBe.x, result.x);
+	EXPECT_EQ(shouldBe.y, result.y);
+}
+TEST_F(PlayerTest, MoveLeftI1fPossible_EmptyCell_Move) {
+	//Given
+	player.SetPosition(2, 2);
+	EXPECT_CALL(*mapMock, IsEmptyCell(1, 2))
+		.WillOnce(Return(true));
+
+	Point shouldBe(1, 2);
+
+	//When
+	player.MoveLeftIfPossible();
+
+	//Then
+	auto result = player.GetPosition();
+	EXPECT_EQ(shouldBe.x, result.x);
+	EXPECT_EQ(shouldBe.y, result.y);
+}
+TEST_F(PlayerTest, MoveLeftIfPossible_WallInCell_NotMove) {
+	//Given
+	player.SetPosition(2, 2);
+	EXPECT_CALL(*mapMock, IsEmptyCell(1, 2))
+		.WillOnce(Return(false));
+
+	Point shouldBe(2, 2);
+
+	//When
+	player.MoveLeftIfPossible();
+
+	//Then
+	auto result = player.GetPosition();
+	EXPECT_EQ(shouldBe.x, result.x);
+	EXPECT_EQ(shouldBe.y, result.y);
+}
+TEST_F(PlayerTest, MoveRightI1fPossible_EmptyCell_Move) {
+	//Given
+	player.SetPosition(2, 2);
+	EXPECT_CALL(*mapMock, IsEmptyCell(3, 2))
+		.WillOnce(Return(true));
+
+	Point shouldBe(3, 2);
+
+	//When
+	player.MoveRightIfPossible();
+
+	//Then
+	auto result = player.GetPosition();
+	EXPECT_EQ(shouldBe.x, result.x);
+	EXPECT_EQ(shouldBe.y, result.y);
+}
+TEST_F(PlayerTest, MoveRightIfPossible_WallInCell_NotMove) {
+	//Given
+	player.SetPosition(2, 2);
+	EXPECT_CALL(*mapMock, IsEmptyCell(3, 2))
+		.WillOnce(Return(false));
+
+	Point shouldBe(2, 2);
+
+	//When
+	player.MoveRightIfPossible();
+
+	//Then
+	auto result = player.GetPosition();
+	EXPECT_EQ(shouldBe.x, result.x);
+	EXPECT_EQ(shouldBe.y, result.y);
+}
