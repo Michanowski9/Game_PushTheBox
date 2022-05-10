@@ -40,7 +40,7 @@ private:
 		LIGHT_RED = 207,
 		LIGHT_PURPLE = 223,
 		YELLOW = 224,
-		WHITE = 255
+		WHITE = 240
 	};
 };
 
